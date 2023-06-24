@@ -96,8 +96,13 @@ function createFileSchema(bucket) {
           return done(error);
         }
         // read file details
-        // eslint-disable-next-line no-underscore-dangle
-        return this.constructor.findById(created._id, done);
+        return (
+          this.constructor
+            // eslint-disable-next-line no-underscore-dangle
+            .findById(created._id)
+            .then((res) => done(null, res))
+            .catch((err) => done(err))
+        );
       }.bind(this)
     );
   };
