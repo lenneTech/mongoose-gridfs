@@ -1,6 +1,6 @@
 {
   "name": "@lenne.tech/mongoose-gridfs",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "main": "lib/index.js",
   "module": "es/index.js",
   "scripts": {
@@ -70,10 +70,10 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/lenneTech/nest-server/issues",
+    "url": "https://github.com/lenneTech/mongoose-gridfs/issues",
     "email": "info@lenne.tech"
   },
-  "homepage": "https://github.com/hermesdj/mongoose-gridfs",
+  "homepage": "https://github.com/lenneTech/mongoose-gridfs",
   "devDependencies": {
     "@babel/cli": "7.18.9",
     "@babel/core": "7.18.9",

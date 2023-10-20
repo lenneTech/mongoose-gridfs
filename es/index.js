@@ -702,7 +702,14 @@ GridFSBucket.prototype.findOne = function findOne(optns, done) {
       error.status = 400;
       return done(error);
     }
-    return cursor.next(done);
+    return cursor
+      .next()
+      .then((item) => {
+        done(undefined, item);
+      })
+      .catch((err) => {
+        done(err);
+      });
   } catch (error) {
     // catch find errors
     return done(error);
