@@ -1,14 +1,8 @@
 # mongoose-gridfs
 
-[![Build Status](https://app.travis-ci.com/lykmapipo/mongoose-gridfs.svg?branch=master)](https://app.travis-ci.com/lykmapipo/mongoose-gridfs)
-[![Dependencies Status](https://david-dm.org/lykmapipo/mongoose-gridfs.svg)](https://david-dm.org/lykmapipo/mongoose-gridfs)
-[![Coverage Status](https://coveralls.io/repos/github/lykmapipo/mongoose-gridfs/badge.svg?branch=master)](https://coveralls.io/github/lykmapipo/mongoose-gridfs?branch=master)
-[![GitHub License](https://img.shields.io/github/license/lykmapipo/mongoose-gridfs)](https://github.com/lykmapipo/mongoose-gridfs/blob/master/LICENSE)
-
-[![Commitizen Friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
-[![Code Style](https://badgen.net/badge/code%20style/airbnb/ff5a5f?icon=airbnb)](https://github.com/airbnb/javascript)
-[![npm version](https://img.shields.io/npm/v/mongoose-gridfs)](https://www.npmjs.com/package/mongoose-gridfs)
+Forked from https://github.com/hermesdj/mongoose-gridfs 
+(which is forked from https://github.com/lykmapipo/mongoose-gridfs) 
+to get a runnable version that works with Mongoose >= 6.
 
 mongoose [gridfs](https://docs.mongodb.com/manual/core/gridfs/) on top of [new gridfs api](http://mongodb.github.io/node-mongodb-native/3.1/tutorials/gridfs/)
 

@@ -109,7 +109,7 @@ function createFileSchema(bucket) {
    * @name read
    * @description Read file from MongoDB GridFS
    * @param {object} optns valid criteria for read existing file.
-   * @param {number} [optns.revision=-1] The revision number relative to the
+   * @param {number} [optns.revision] The revision number relative to the
    * oldest file with the given filename. 0 gets you the oldest file, 1 gets you
    * the 2nd oldest, -1 gets you the newest.
    * @param {number} [optns.start] Optional 0-based offset in bytes to start
@@ -241,7 +241,7 @@ function createFileSchema(bucket) {
    * @param {object} optns valid criteria for read existing file.
    * @param {object} optns._id The id of the file doc
    * @param {string} [optns.filename] The name of the file doc to stream
-   * @param {number} [optns.revision=-1] The revision number relative to the
+   * @param {number} [optns.revision] The revision number relative to the
    * oldest file with the given filename. 0 gets you the oldest file, 1 gets you
    * the 2nd oldest, -1 gets you the newest.
    * @param {number} [optns.start] Optional 0-based offset in bytes to start

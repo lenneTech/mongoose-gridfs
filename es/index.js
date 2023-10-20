@@ -112,7 +112,7 @@ function createFileSchema(bucket) {
    * @name read
    * @description Read file from MongoDB GridFS
    * @param {object} optns valid criteria for read existing file.
-   * @param {number} [optns.revision=-1] The revision number relative to the
+   * @param {number} [optns.revision] The revision number relative to the
    * oldest file with the given filename. 0 gets you the oldest file, 1 gets you
    * the 2nd oldest, -1 gets you the newest.
    * @param {number} [optns.start] Optional 0-based offset in bytes to start
@@ -244,7 +244,7 @@ function createFileSchema(bucket) {
    * @param {object} optns valid criteria for read existing file.
    * @param {object} optns._id The id of the file doc
    * @param {string} [optns.filename] The name of the file doc to stream
-   * @param {number} [optns.revision=-1] The revision number relative to the
+   * @param {number} [optns.revision] The revision number relative to the
    * oldest file with the given filename. 0 gets you the oldest file, 1 gets you
    * the 2nd oldest, -1 gets you the newest.
    * @param {number} [optns.start] Optional 0-based offset in bytes to start
@@ -417,7 +417,7 @@ Object.defineProperty(GridFSBucket.prototype, 'collectionName', {
  * document's `contentType` field.
  * @param {Array} [optns.aliases] Optional array of strings to store in the
  * file document's `aliases` field.
- * @param {boolean} [optns.disableMD5=false] If true, disables adding an
+ * @param {boolean} [optns.disableMD5] If true, disables adding an
  * md5 field to file data.
  * @returns {object} Valid mongodb `GridFSBucketWriteStream`
  * @author lally elias <lallyelias87@mail.com>
@@ -465,7 +465,7 @@ GridFSBucket.prototype.createWriteStream = function createWriteStream(optns) {
  * @param {object} [optns] Valid options for read existing file.
  * @param {ObjectId} optns._id The id of the file doc
  * @param {string} [optns.filename] The name of the file doc to stream
- * @param {number} [optns.revision=-1] The revision number relative to the
+ * @param {number} [optns.revision] The revision number relative to the
  * oldest file with the given filename. 0 gets you the oldest file, 1 gets you
  * the 2nd oldest, -1 gets you the newest.
  * @param {number} [optns.start] Optional 0-based offset in bytes to start
@@ -587,7 +587,7 @@ GridFSBucket.prototype.writeFile = function writeFile(file, readstream, done) {
  * @param {object} optns valid criteria for read existing file.
  * @param {object} optns._id The id of the file doc
  * @param {string} [optns.filename] The name of the file doc to stream
- * @param {number} [optns.revision=-1] The revision number relative to the
+ * @param {number} [optns.revision] The revision number relative to the
  * oldest file with the given filename. 0 gets you the oldest file, 1 gets you
  * the 2nd oldest, -1 gets you the newest.
  * @param {number} [optns.start] Optional 0-based offset in bytes to start
@@ -659,9 +659,13 @@ GridFSBucket.prototype.readFile = function readFile(optns, done) {
  * bucket.deleteFile(_id, (error, results) => { ... });
  */
 GridFSBucket.prototype.deleteFile = function deleteFile(_id, done) {
-  this.delete(_id, function afterDelete(error) {
-    return done(error, _id);
-  });
+  this.delete(_id)
+    .then(() => {
+      done(undefined, _id);
+    })
+    .catch((err) => {
+      done(err, _id);
+    });
 };
 
 GridFSBucket.prototype.unlink = GridFSBucket.prototype.deleteFile;
@@ -835,11 +839,11 @@ GridFSBucket.prototype._removeFile = function _removeFile(request, file, done) {
  * @name createBucket
  * @description Create GridFSBucket
  * @param {object} [optns] Optional settings.
- * @param {object} [optns.connection = mongoose.connection] A valid
+ * @param {object} [optns.connection] A valid
  * instance of mongoose connection.
- * @param {string} [optns.bucketName="fs"] The 'files' and 'chunks' collections
+ * @param {string} [optns.bucketName] The 'files' and 'chunks' collections
  * will be prefixed with the bucket name followed by a dot.
- * @param {number} [optns.chunkSizeBytes=255 * 1024] Number of bytes stored in
+ * @param {number} [optns.chunkSizeBytes] Number of bytes stored in
  * each chunk. Defaults to 255KB
  * @param {object} [optns.writeConcern] Optional write concern to be passed to
  * write operations, for instance `{ w: 1 }`
@@ -880,13 +884,13 @@ function createBucket(optns = {}) {
  * @name createModel
  * @description Create GridFSBucket files collection model
  * @param {object} [optns] Optional settings.
- * @param {object} [optns.connection = mongoose.connection] A valid instance
+ * @param {object} [optns.connection] A valid instance
  * of mongoose connection.
- * @param {string} [optns.modelName="File"] Valid model name to use with
+ * @param {string} [optns.modelName] Valid model name to use with
  * mongoose
- * @param {string} [optns.bucketName="fs"] The 'files' and 'chunks' collections
+ * @param {string} [optns.bucketName] The 'files' and 'chunks' collections
  * will be prefixed with the bucket name followed by a dot.
- * @param {number} [optns.chunkSizeBytes=255 * 1024] Number of bytes stored in
+ * @param {number} [optns.chunkSizeBytes] Number of bytes stored in
  * each chunk. Defaults to 255KB
  * @param {object} [optns.writeConcern] Optional write concern to be passed to
  * write operations, for instance `{ w: 1 }`
