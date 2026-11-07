@@ -28,7 +28,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/lenneTech/mongoose-gridfs.git"
+    "url": "https://github.com/lenneTech/mongoose-gridfs"
   },
   "keywords": [
     "mongoose-plugin",
